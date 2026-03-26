@@ -269,6 +269,7 @@ Current variables:
 MYSQL_ROOT_PASSWORD=...
 MYSQL_DATABASE=taskdb
 MYSQL_HOST_PORT=3307
+JWT_SECRET=your_secret
 ```
 
 ## Run with Docker Compose
