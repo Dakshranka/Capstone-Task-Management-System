@@ -56,7 +56,9 @@ Capstone_project/
 ## Core Features
 
 ## Authentication and Authorization
-- User registration (self register as USER)
+- User registration:
+  - first registered account becomes ADMIN
+  - all subsequent registrations become USER
 - User login with JWT token
 - Role-based access:
   - ADMIN
