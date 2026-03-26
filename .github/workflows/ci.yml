@@ -11,6 +11,19 @@ on:
 jobs:
   build-and-docker:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          MYSQL_DATABASE: taskdb
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
 
     steps:
       - name: Checkout repository
@@ -37,6 +50,12 @@ jobs:
       - name: Build backend (mvn clean verify)
         run: ./mvnw clean verify
         working-directory: capstone-project-backend
+        env:
+          SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/taskdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+          SPRING_DATASOURCE_USERNAME: root
+          SPRING_DATASOURCE_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          APP_JWT_SECRET: ThisIsADevOnlySuperSecretJwtKeyThatIsLongEnough123456
+          APP_JWT_EXPIRATION_MS: 86400000
 
       - name: Build frontend (npm ci + npm run build)
         run: |
