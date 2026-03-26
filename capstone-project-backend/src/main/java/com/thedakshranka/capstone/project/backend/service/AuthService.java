@@ -33,13 +33,11 @@ public class AuthService {
             throw new IllegalArgumentException("Email is already in use");
         }
 
-        Role role = request.getRole() == null ? Role.USER : request.getRole();
-
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(role);
+        user.setRole(Role.USER);
 
         User savedUser = userRepository.save(user);
         String token = jwtUtil.generateToken(savedUser);

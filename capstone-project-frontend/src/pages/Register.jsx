@@ -12,7 +12,6 @@ function Register() {
     name: '',
     email: '',
     password: '',
-    role: 'USER',
   });
 
   const [error, setError] = useState('');
@@ -102,14 +101,6 @@ function Register() {
                   onChange={onChange}
                 />
                 {errors.password && <div className="form-error mt-1">{errors.password}</div>}
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">Role</label>
-                <select className="form-select" name="role" value={form.role} onChange={onChange}>
-                  <option value="USER">USER</option>
-                  <option value="ADMIN">ADMIN</option>
-                </select>
               </div>
 
               <button className="btn btn-success w-100" type="submit">

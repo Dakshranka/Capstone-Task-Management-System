@@ -11,9 +11,9 @@ function AppNavbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg bg-white border-bottom sticky-top shadow-sm">
+    <nav className="navbar navbar-expand-lg bg-white border-bottom sticky-top shadow-sm app-navbar">
       <div className="container">
-        <Link className="navbar-brand fw-semibold text-success" to="/dashboard">
+        <Link className="navbar-brand fw-semibold text-success" to="/">
           TaskFlow
         </Link>
 
@@ -33,6 +33,11 @@ function AppNavbar() {
           {isAuthenticated ? (
             <>
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                  <NavLink to="/" className="nav-link">
+                    Home
+                  </NavLink>
+                </li>
                 <li className="nav-item">
                   <NavLink to="/dashboard" className="nav-link">
                     Dashboard
@@ -62,6 +67,11 @@ function AppNavbar() {
             </>
           ) : (
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <NavLink to="/" className="nav-link">
+                  Home
+                </NavLink>
+              </li>
               <li className="nav-item">
                 <NavLink to="/login" className="nav-link">
                   Login
