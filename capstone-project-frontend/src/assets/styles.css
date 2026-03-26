@@ -1,0 +1,61 @@
+:root {
+  --brand: #1e6f5c;
+  --brand-dark: #145445;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --surface: #f7faf9;
+  --card: #ffffff;
+  --danger: #dc3545;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--ink);
+  background: linear-gradient(135deg, #eef6f2 0%, #f8fbfa 100%);
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.fade-in {
+  animation: fadeIn 0.45s ease-in-out;
+}
+
+.card-animate {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-animate:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(31, 41, 55, 0.12);
+}
+
+.task-badge {
+  font-size: 0.75rem;
+}
+
+.empty-state {
+  border: 1px dashed #cfd8d5;
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--muted);
+}
+
+.form-error {
+  color: var(--danger);
+  font-size: 0.875rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
