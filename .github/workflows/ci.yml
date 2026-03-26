@@ -54,8 +54,8 @@ jobs:
           SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/taskdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
           SPRING_DATASOURCE_USERNAME: root
           SPRING_DATASOURCE_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-          APP_JWT_SECRET: ThisIsADevOnlySuperSecretJwtKeyThatIsLongEnough123456
-          APP_JWT_EXPIRATION_MS: 86400000
+          APP_JWT_SECRET: ${{ secrets.APP_JWT_SECRET }}
+          APP_JWT_EXPIRATION_MS: ${{ secrets.APP_JWT_EXPIRATION_MS }}
 
       - name: Build frontend (npm ci + npm run build)
         run: |
@@ -81,7 +81,7 @@ jobs:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/capstone-backend
           tags: |
             type=raw,value=latest
-            type=sha
+            
 
       - name: Build and push backend Docker image
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -100,7 +100,7 @@ jobs:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/capstone-frontend
           tags: |
             type=raw,value=latest
-            type=sha
+            
 
       - name: Build and push frontend Docker image
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
