@@ -286,7 +286,6 @@ MYSQL_DATABASE=taskdb
 MYSQL_HOST_PORT=3307
 BACKEND_HOST_PORT=8081
 VITE_API_BASE_URL=http://localhost:8081/api
-JWT_SECRET=your_secret
 ```
 
 If backend host port is changed, update both:
@@ -337,6 +336,69 @@ Pipeline on push and pull request to main:
 ## Docker Image Names
 - <DOCKERHUB_USERNAME>/capstone-backend:latest
 - <DOCKERHUB_USERNAME>/capstone-frontend:latest
+
+## 🚀 Run Project Using Docker (No Source Code Required)
+
+### ✅ Step 1: Pull Images(Optional)
+
+```bash
+docker pull <DOCKERHUB_USERNAME>/capstone-backend:latest
+docker pull <DOCKERHUB_USERNAME>/capstone-frontend:latest
+```
+
+### ✅ Step 2: Create Network
+
+```bash
+docker network create capstone-net
+```
+
+### ✅ Step 3: Run MySQL
+
+```bash
+docker run -d --name taskdb-mysql --network capstone-net -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=taskdb -p 3307:3306 mysql:8.0
+```
+
+### ✅ Step 4: Run Backend
+
+```bash
+docker run -d --name task-backend --network capstone-net -e SPRING_DATASOURCE_URL=jdbc:mysql://taskdb-mysql:3306/taskdb -e SPRING_DATASOURCE_USERNAME=root -e SPRING_DATASOURCE_PASSWORD=root -e SERVER_PORT=8081 -e app.jwt.secret=mysecretkeymysecretkeymysecretkey12 -e app.jwt.expiration-ms=3600000 -e SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.MySQLDialect -e SPRING_JPA_HIBERNATE_DDL_AUTO=update -p 8081:8081 <DOCKERHUB_USERNAME>/capstone-backend:latest
+```
+
+### ✅ Step 5: Run Frontend (Vite)
+
+```bash
+docker run -d --name task-frontend --network capstone-net -p 5173:5173 <DOCKERHUB_USERNAME>/capstone-frontend:latest
+```
+
+###  Access the Application
+
+- Frontend -> http://localhost:5173
+- Backend -> http://localhost:8080
+
+###  Important Notes
+
+- Backend runs internally on 8081 but is exposed on 8080.
+- Always call backend using: http://localhost:8080
+- Do NOT use localhost:8081 in frontend.
+- Set frontend environment variable: VITE_API_URL=http://localhost:8080
+
+###  Architecture Flow
+
+GitHub -> GitHub Actions -> Docker Hub -> Local/EC2 -> Browser
+
+- Code pushed to GitHub
+- GitHub Actions builds and tests
+- Docker images pushed to Docker Hub
+- Images pulled on any machine
+- Containers run (MySQL + Backend + Frontend)
+- Application accessed via browser
+
+###  Security Notes
+
+- Do not commit real secrets in source control
+- Use GitHub Secrets for CI/CD
+- Keep .env out of Git
+- Keep backend application.properties out of Git
 
 ## Security Notes
 - Do not commit real secrets in source control
