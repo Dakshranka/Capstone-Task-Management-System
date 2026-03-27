@@ -337,34 +337,34 @@ Pipeline on push and pull request to main:
 - <DOCKERHUB_USERNAME>/capstone-backend:latest
 - <DOCKERHUB_USERNAME>/capstone-frontend:latest
 
-## 🚀 Run Project Using Docker (No Source Code Required)
+## Run Project Using Docker (No Source Code Required)
 
-### ✅ Step 1: Pull Images(Optional)
+### Step 1: Pull Images(Optional)
 
 ```bash
 docker pull <DOCKERHUB_USERNAME>/capstone-backend:latest
 docker pull <DOCKERHUB_USERNAME>/capstone-frontend:latest
 ```
 
-### ✅ Step 2: Create Network
+### Step 2: Create Network
 
 ```bash
 docker network create capstone-net
 ```
 
-### ✅ Step 3: Run MySQL
+### Step 3: Run MySQL
 
 ```bash
 docker run -d --name taskdb-mysql --network capstone-net -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=taskdb -p 3307:3306 mysql:8.0
 ```
 
-### ✅ Step 4: Run Backend
+### Step 4: Run Backend
 
 ```bash
 docker run -d --name task-backend --network capstone-net -e SPRING_DATASOURCE_URL=jdbc:mysql://taskdb-mysql:3306/taskdb -e SPRING_DATASOURCE_USERNAME=root -e SPRING_DATASOURCE_PASSWORD=root -e SERVER_PORT=8081 -e app.jwt.secret=mysecretkeymysecretkeymysecretkey12 -e app.jwt.expiration-ms=3600000 -e SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.MySQLDialect -e SPRING_JPA_HIBERNATE_DDL_AUTO=update -p 8081:8081 <DOCKERHUB_USERNAME>/capstone-backend:latest
 ```
 
-### ✅ Step 5: Run Frontend (Vite)
+### Step 5: Run Frontend (Vite)
 
 ```bash
 docker run -d --name task-frontend --network capstone-net -p 5173:5173 <DOCKERHUB_USERNAME>/capstone-frontend:latest
