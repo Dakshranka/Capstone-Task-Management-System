@@ -1,5 +1,9 @@
 package com.thedakshranka.capstone.project.backend.entity;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,9 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.CreationTimestamp;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -33,6 +34,9 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
+    @Column
+    private Boolean active;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -46,6 +50,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.role = role;
+        this.active = true;
         this.createdAt = createdAt;
     }
 
@@ -87,6 +92,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public LocalDateTime getCreatedAt() {

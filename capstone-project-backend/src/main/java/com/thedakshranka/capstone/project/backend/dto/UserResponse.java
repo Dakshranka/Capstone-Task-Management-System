@@ -9,13 +9,15 @@ public class UserResponse {
     private final String name;
     private final String email;
     private final Role role;
+    private final boolean active;
     private final LocalDateTime createdAt;
 
-    public UserResponse(Long id, String name, String email, Role role, LocalDateTime createdAt) {
+    public UserResponse(Long id, String name, String email, Role role, boolean active, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.role = role;
+        this.active = active;
         this.createdAt = createdAt;
     }
 
@@ -33,6 +35,10 @@ public class UserResponse {
 
     public Role getRole() {
         return role;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 
     public LocalDateTime getCreatedAt() {

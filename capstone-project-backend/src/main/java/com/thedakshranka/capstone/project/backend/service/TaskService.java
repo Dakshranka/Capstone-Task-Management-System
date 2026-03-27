@@ -26,6 +26,9 @@ public class TaskService {
 
     public TaskResponse createTask(TaskRequest request, String currentUserEmail) {
         User assignedTo = userService.getUserEntityById(request.getAssignedToId());
+        if (!userService.isActive(assignedTo)) {
+            throw new IllegalArgumentException("Task cannot be assigned to an inactive user");
+        }
         User createdBy = userService.getUserEntityByEmail(currentUserEmail);
 
         Task task = new Task();
@@ -102,6 +105,10 @@ public class TaskService {
         }
 
         User assignedTo = userService.getUserEntityById(request.getAssignedToId());
+        boolean sameAssignee = task.getAssignedTo().getId().equals(assignedTo.getId());
+        if (!sameAssignee && !userService.isActive(assignedTo)) {
+            throw new IllegalArgumentException("Task cannot be assigned to an inactive user");
+        }
 
         task.setTitle(request.getTitle());
         task.setDescription(request.getDescription());

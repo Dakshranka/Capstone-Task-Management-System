@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -79,6 +80,18 @@ public class GlobalExceptionHandler {
                         .status(HttpStatus.UNAUTHORIZED.value())
                         .error(HttpStatus.UNAUTHORIZED.getReasonPhrase())
                         .message("Invalid email or password")
+                        .build()
+        );
+    }
+
+    @ExceptionHandler(DisabledException.class)
+    public ResponseEntity<ApiErrorResponse> handleDisabledAccount(DisabledException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+                ApiErrorResponse.builder()
+                        .timestamp(LocalDateTime.now())
+                        .status(HttpStatus.UNAUTHORIZED.value())
+                        .error(HttpStatus.UNAUTHORIZED.getReasonPhrase())
+                        .message("Your account is deactivated. Please contact an admin")
                         .build()
         );
     }

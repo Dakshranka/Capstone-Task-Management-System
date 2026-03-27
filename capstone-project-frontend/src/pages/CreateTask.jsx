@@ -31,7 +31,7 @@ function CreateTask() {
       }
 
       try {
-        const data = await userService.getUsers();
+        const data = await userService.getActiveUsers();
         setUsers(data);
       } catch (apiError) {
         setError(normalizeApiError(apiError, 'Unable to load users. Admin-only endpoint may be restricted.'));

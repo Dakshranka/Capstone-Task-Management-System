@@ -155,8 +155,21 @@ Frontend URL:
 - http://localhost:5173
 
 Notes:
-- Frontend Axios base URL is configured to backend at http://localhost:8081/api
+- Frontend Axios base URL is configurable with VITE_API_BASE_URL (default: http://localhost:8081/api)
 - JWT token is automatically attached via request interceptor
+
+Create a local frontend env file if needed:
+
+```bash
+cd capstone-project-frontend
+cp .env.example .env.local
+```
+
+Example:
+
+```env
+VITE_API_BASE_URL=http://localhost:9090/api
+```
 
 ## API Documentation
 
@@ -269,7 +282,13 @@ Current variables:
 MYSQL_ROOT_PASSWORD=...
 MYSQL_DATABASE=taskdb
 MYSQL_HOST_PORT=3307
+BACKEND_HOST_PORT=8081
+VITE_API_BASE_URL=http://localhost:8081/api
 ```
+
+If backend host port is changed, update both:
+- BACKEND_HOST_PORT (host mapping for backend container)
+- VITE_API_BASE_URL (frontend API target)
 
 ## Run with Docker Compose
 
@@ -279,7 +298,7 @@ docker compose up --build
 
 Services:
 - db: MySQL 8 (container 3306, host mapped to MYSQL_HOST_PORT default 3307)
-- backend: Spring Boot on 8081
+- backend: Spring Boot on container port 8081, host mapped to BACKEND_HOST_PORT
 - frontend: Vite preview on 5173
 
 Stop:

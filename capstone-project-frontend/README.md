@@ -1,16 +1,34 @@
-# React + Vite
+# Capstone Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite frontend for the TaskFlow project.
 
-Currently, two official plugins are available:
+## API Base URL Configuration
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The frontend reads backend API URL from:
 
-## React Compiler
+- `VITE_API_BASE_URL`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+If not provided, it falls back to:
 
-## Expanding the ESLint configuration
+- `http://localhost:8081/api`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Local development
+
+Create `.env.local` from example:
+
+```bash
+cp .env.example .env.local
+```
+
+Set the API URL:
+
+```env
+VITE_API_BASE_URL=http://localhost:8081/api
+```
+
+If your backend runs on another host port, update this value accordingly (for example `9090`).
+
+### Docker build
+
+The Dockerfile accepts build arg `VITE_API_BASE_URL` and bakes it into the frontend build.
+In root `docker-compose.yml`, this value is passed from `.env`.
