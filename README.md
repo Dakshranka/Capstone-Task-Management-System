@@ -56,7 +56,9 @@ Capstone_project/
 ## Core Features
 
 ## Authentication and Authorization
-- User registration (self register as USER)
+- User registration:
+  - first registered account becomes ADMIN
+  - all subsequent registrations become USER
 - User login with JWT token
 - Role-based access:
   - ADMIN
@@ -284,6 +286,7 @@ MYSQL_DATABASE=taskdb
 MYSQL_HOST_PORT=3307
 BACKEND_HOST_PORT=8081
 VITE_API_BASE_URL=http://localhost:8081/api
+JWT_SECRET=your_secret
 ```
 
 If backend host port is changed, update both:
