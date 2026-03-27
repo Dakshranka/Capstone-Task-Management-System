@@ -393,13 +393,6 @@ GitHub -> GitHub Actions -> Docker Hub -> Local/EC2 -> Browser
 - Containers run (MySQL + Backend + Frontend)
 - Application accessed via browser
 
-###  Security Notes
-
-- Do not commit real secrets in source control
-- Use GitHub Secrets for CI/CD
-- Keep .env out of Git
-- Keep backend application.properties out of Git
-
 ## Security Notes
 - Do not commit real secrets in source control
 - Keep .env out of Git (already ignored at root)
