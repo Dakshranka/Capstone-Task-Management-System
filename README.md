@@ -428,3 +428,41 @@ docker compose down
 - Task CRUD works
 - Docker compose starts all services
 - GitHub Actions workflow passes on main
+
+## TaskFlow Dashboard Images
+
+Home page
+
+<img width="1773" height="893" alt="image" src="https://github.com/user-attachments/assets/f4246175-0e02-498d-8eda-816215d35fd3" />
+
+Login page 
+
+<img width="775" height="553" alt="image" src="https://github.com/user-attachments/assets/1d365418-163a-489e-b4ae-63a83f7477a5" />
+
+Admin Dashboard
+
+<img width="1213" height="865" alt="image" src="https://github.com/user-attachments/assets/04f11711-955b-4247-8933-1d98f90dbbe9" />
+
+User Dashboard
+
+<img width="1191" height="676" alt="image" src="https://github.com/user-attachments/assets/1121198c-81af-456c-98f9-f08818842d5e" />
+
+Manage users By Admin
+
+<img width="1091" height="510" alt="image" src="https://github.com/user-attachments/assets/8af818dd-b26b-4ec3-8ce1-1436015d2ae7" />
+
+Create task 
+
+<img width="798" height="420" alt="image" src="https://github.com/user-attachments/assets/a046f919-7d16-4d2a-9f3b-4467f967175c" />
+
+
+Edit Task to update progress
+
+<img width="730" height="430" alt="image" src="https://github.com/user-attachments/assets/58dc9a48-7a19-42ec-9e53-1ada7fe1fccf" />
+
+
+
+
+
+
+
